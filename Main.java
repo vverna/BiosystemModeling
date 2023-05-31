@@ -90,23 +90,23 @@ public class Main {
 
     public String generateAxiom(){
         String axiom = (Math.random()>0.5) ? "L" : "F";
-        // String[] symbols = {"F","L","+","-", ""};
-        // for(int i=1; i<3; i++){
-        //     double rand = Math.random();
-        //     if(rand<=0.3){
-        //         axiom+=symbols[0];
-        //     } else if (rand<=0.6){
-        //         axiom+=symbols[1];
-        //     } else if (rand<=0.7){
-        //         axiom+=symbols[2];
-        //     }else if (rand<=0.8){
-        //         axiom+=symbols[3];
-        //     }else{
-        //         axiom+=symbols[4];
-        //     }            
-        // }
-        // axiom = axiom.replace("-+", "");
-        // axiom = axiom.replace("+-", "");
+        String[] symbols = {"F","L","+","-", ""};
+        for(int i=1; i<3; i++){
+            double rand = Math.random();
+            if(rand<=0.3){
+                axiom+=symbols[0];
+            } else if (rand<=0.6){
+                axiom+=symbols[1];
+            } else if (rand<=0.7){
+                axiom+=symbols[2];
+            }else if (rand<=0.8){
+                axiom+=symbols[3];
+            }else{
+                axiom+=symbols[4];
+            }            
+        }
+        axiom = axiom.replace("-+", "");
+        axiom = axiom.replace("+-", "");
         return axiom;
     }
 
@@ -154,13 +154,6 @@ public class Main {
         int maxFitnessN=0;
         LSystem chrom = org.getChromasome();
         BufferedImage tmp = new BufferedImage(origImage.getWidth(), origImage.getHeight(), BufferedImage.TYPE_INT_RGB);
-        
-        // chrom.setBufferedImage(tmp);
-        // BufferedImage tmp2 = chrom.doIterationsAndReturn(maxN);
-        // maxFitness = ComparePictures.compareImages(origImage, tmp2);
-        // chrom.clear();
-        // org.setIteration(maxFitnessN);
-        // maxFitnessN =maxN;
         LSystem bestL = chrom;
         for(int i=1; i<=maxN; i++){
             chrom.setBufferedImage(tmp);
@@ -173,7 +166,6 @@ public class Main {
                 maxFitnessN=i;
             }
         }
-        // chrom.clear();
         org.setChromasome(bestL);
         org.setFitness(maxFitness);
         org.setIteration(maxFitnessN);
