@@ -302,7 +302,7 @@ public class Main {
             Main app = new Main(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]), args[3]);
             app.runSimulation();
         } else {
-            System.out.println("Incorrect input. Please try again.");
+            System.out.println("Invalid input. Please try again.");
         }
       }
 
