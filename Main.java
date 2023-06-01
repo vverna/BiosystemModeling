@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.util.Arrays;
 import java.util.Random;
+import java.io.File;
 import java.io.FileWriter;
 
 public class Main {
@@ -25,7 +26,7 @@ public class Main {
         outputFile = output;
         populationSize = popSize;
         try {
-            origImage = ImageIO.read(getClass().getResource(file));
+            origImage = ImageIO.read(new File(file));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,7 +38,6 @@ public class Main {
         for (int y = origImage.getHeight()-1; y>=0; y--) {
             for (int x = 0; x < origImage.getWidth(); x++) {
                 if (origImage.getRGB(x, y) != white){
-                    // System.out.println(x + " " + y);
                     return  new double[] {(double) x, (double) y};
                 }
             }
@@ -90,23 +90,23 @@ public class Main {
 
     public String generateAxiom(){
         String axiom = (Math.random()>0.5) ? "L" : "F";
-        String[] symbols = {"F","L","+","-", ""};
-        for(int i=1; i<3; i++){
-            double rand = Math.random();
-            if(rand<=0.3){
-                axiom+=symbols[0];
-            } else if (rand<=0.6){
-                axiom+=symbols[1];
-            } else if (rand<=0.7){
-                axiom+=symbols[2];
-            }else if (rand<=0.8){
-                axiom+=symbols[3];
-            }else{
-                axiom+=symbols[4];
-            }            
-        }
-        axiom = axiom.replace("-+", "");
-        axiom = axiom.replace("+-", "");
+        // String[] symbols = {"F","L","+","-", ""};
+        // for(int i=1; i<3; i++){
+        //     double rand = Math.random();
+        //     if(rand<=0.3){
+        //         axiom+=symbols[0];
+        //     } else if (rand<=0.6){
+        //         axiom+=symbols[1];
+        //     } else if (rand<=0.7){
+        //         axiom+=symbols[2];
+        //     }else if (rand<=0.8){
+        //         axiom+=symbols[3];
+        //     }else{
+        //         axiom+=symbols[4];
+        //     }            
+        // }
+        // axiom = axiom.replace("-+", "");
+        // axiom = axiom.replace("+-", "");
         return axiom;
     }
 
@@ -166,6 +166,7 @@ public class Main {
                 maxFitnessN=i;
             }
         }
+        // chrom.clear();
         org.setChromasome(bestL);
         org.setFitness(maxFitness);
         org.setIteration(maxFitnessN);
@@ -289,13 +290,6 @@ public class Main {
         saveParameters(population[0]);
     } 
 
-    public void drawOver(){
-        LSystem l = new LSystem("F", 1);
-        l.setStartPoint(calcStartPoint());
-        l.setSequence("");
-        l.drawLSystem();
-        l.saveToFile("pv1/overlap.png");
-    }
 
     public static void main(String[] args) {
         if (args.length == 4){
